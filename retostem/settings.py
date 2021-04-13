@@ -25,7 +25,7 @@ with open(BASE_DIR/'SECRET_KEY') as f:
     SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -79,9 +79,9 @@ WSGI_APPLICATION = 'retostem.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'stemreto',
-        'USER': 'stemreto',
-        'PASSWORD': 'stemreto2021',
+        'NAME': 'stem',
+        'USER': 'stem_user',
+        'PASSWORD': 'stemreto',
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -126,4 +126,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
-STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+#STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+LOGIN_REDIRECT_URL = '/'

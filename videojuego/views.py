@@ -2,12 +2,21 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
-from json import loads
+from json import loads, dumps
 from . models import Reto
 import psycopg2
 
 
 # Create your views here.
+
+def grafica(request):
+    data = [ ['Age', 'Weight'], [ 8,      12], [ 4,      5.5], [ 11,     14],
+          [ 4,      5],
+          [ 3,      3.5],
+          [ 6.5,    7]
+        ]
+    datos_formato = dumps(data)    
+    return render(request,'grafica.html', {'losDatos':datos_formato})
 
 def index(request):
     #return HttpResponse('<h1> Saludos desde Django</h1>')

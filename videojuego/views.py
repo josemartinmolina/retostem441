@@ -4,19 +4,41 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from json import loads, dumps
 from . models import Reto
+from random import randrange
 import psycopg2
 
 
 # Create your views here.
 
 def grafica(request):
-    data = [ ['Age', 'Weight'], [ 8,      12], [ 4,      5.5], [ 11,     14],
-          [ 4,      5],
-          [ 3,      3.5],
-          [ 6.5,    7]
-        ]
-    datos_formato = dumps(data)    
+    #data = [ ['Age', 'Weight'], [ 8,      12], [ 4,      5.5], [ 11,     14],[ 4,      5],[ 3,      3.5],[ 6.5,    7]]
+    data = [['Edad', 'Peso']]
+        
     return render(request,'grafica.html', {'losDatos':datos_formato})
+
+def barras(request):
+    '''
+    data = [
+          ['Year', 'Sales', 'Expenses', 'Profit'],
+          ['2014', 1000, 400, 200],
+          ['2015', 1170, 460, 250],
+          ['2016', 660, 1120, 300],
+          ['2017', 1030, 540, 350]
+        ]
+    '''
+    data = [['Nombre', 'Minutos jugados']]
+    resultados = Reto.objects.all() #select * from Reto;
+    for i in resultados:
+        x = i.nombre
+        y = i.minutos_jugados
+        data.append([x,y])
+    
+    datos_formato = dumps(data)    
+    titulo = 'Indicador STEM'
+    subtitulo = 'Minutos jugados totales'
+    titulo_formato = dumps(titulo)
+    subtitulo_formato = dumps(subtitulo)
+    return render(request,'barras.html', {'losDatos':datos_formato, 'titulo':titulo_formato, 'subtitulo':subtitulo_formato})
 
 def index(request):
     #return HttpResponse('<h1> Saludos desde Django</h1>')

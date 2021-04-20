@@ -9,6 +9,7 @@ urlpatterns = [
     path('ejemploSQL', views.ejemploSQL, name='ejemploSQL'),
     path('score',views.score, name = 'score'),
     path('grafica',views.grafica, name = 'grafica'),
+    path('barras',views.barras, name = 'barras'),
 ]
 
 urlpatterns += [
